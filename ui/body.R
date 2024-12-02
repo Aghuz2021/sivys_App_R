@@ -52,7 +52,8 @@ background-color: #fffff;
     border-left: 12px solid transparent;
 }
    
-      "))
+      "
+      ))
     ),
   tabItems(
     # Tab para "Venta de casas"
@@ -195,6 +196,149 @@ background-color: #fffff;
                 plotOutput("plot_depto", height = "300px")
               )
             )
+    ),
+    tabItem(
+  tabName = "Home",
+  fluidRow(
+    # Estilos para mejorar la apariencia
+    tags$style(HTML("
+    .info-box-content  { 
+        padding: 0px 26px;
+        margin-left: 0px;
+      }
+    .info-box-content h3 {
+    font-size: 24px;
+    background: #4d6d7cf5;
+    color: white;
+    padding: 7px;
+    }
+      .info-box-content p { 
+        font-size: 14px; 
+        line-height: 1.5; 
+      }
+      .zones-container {
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 20px; 
+        justify-content: space-around;
+      }
+      .zone-column {
+        flex: 1 1 calc(20% - 20px);
+        min-width: 150px;
+        border: 1px solid #3748504d;
+        background: white;
+        margin-top: 1 px solid;
+        padding: 8px;
+        border-radius: 10px;
+      }
+      .zone-column ul {
+        padding-left: 20px; 
+      }
+      @media (max-width: 768px) {
+        .zone-column {
+          flex: 1 1 100%;
+        }
+      }
+    ")),
+    # Información descriptiva
+    
+      div(
+        class = "info-box-content",
+        HTML("
+          <h3>Objetivos</h3>
+          <p>
+            El Sistema de Información de Vivienda y Suelo de Tres de Febrero (SIVyS) permite reunir, producir, analizar y difundir datos relacionados con la situación de la vivienda y el suelo del Municipio, 
+            así como conocer la situación habitacional de las familias y cuantificar la valorización del suelo producto de la intervención pública municipal.
+          </p>
+          <p>
+            Este Monitor Periódico de Indicadores tiene como objetivo relevar las dinámicas del mercado inmobiliario dentro del Partido de Tres de Febrero, 
+            mediante la revisión de los datos recolectados en publicaciones (de operaciones de alquiler y compra-venta de viviendas) realizadas en Mercado Libre, 
+            procesados por la Fundación Universidad de San Andrés y la Municipalidad para su mejor manipulación.
+          </p>
+          <h3>Fuente de información y tratamiento de la base de datos</h3>
+          <p>
+            Mensualmente, Mercado Libre envía a la Municipalidad los siguientes datos:
+          </p>
+          <ul>
+            <li>Fecha de recolección de la publicación</li>
+            <li>Carácter de la publicación (dueño directo o inmobiliaria)</li>
+            <li>Tipo de operación (alquiler o venta)</li>
+            <li>m² totales y m² cubiertos</li>
+            <li>Cantidad de habitaciones y ambientes</li>
+            <li>Tipo de propiedad (departamento o casa)</li>
+            <li>Moneda de la publicación</li>
+            <li>Precio en dólares y moneda local</li>
+            <li>ID de la publicación</li>
+            <li>Coordenadas del inmueble</li>
+          </ul>
+          <p>
+           Recibido los datos, la Municipalidad realiza el siguiente procedimiento sobre los mismos:
+          </p>
+          <ul>
+            <li>Asignación de localidades predefinidas</li>
+            <li>Conversión de valores a dólar MEP</li>
+            <li>Limpieza de datos poco fiables y eliminación de outliers</li>
+            <li>Calculo de valores de m²</li>
+            <li>Agrupación de localidades en Zonas Agrupadas</li>
+          </ul>
+          <h3>Zonas Agrupadas</h3>
+          <p>
+            Dado que algunas localidades tienen pocas publicaciones, se generaron agrupaciones en zonas para establecer muestras más representativas.
+          </p>
+          <div class='zones-container'>
+            <div class='zone-column'>
+              <h4>Norte</h4>
+              <ul>
+                <li>11 de Septiembre</li>
+                <li>Churruca</li>
+                <li>El Libertador</li>
+                <li>Loma Hermosa</li>
+                <li>Pablo Podestá</li>
+                <li>Remedios de Escalada de San Martín</li>
+              </ul>
+            </div>
+            <div class='zone-column'>
+              <h4>Centro</h4>
+              <ul>
+                <li>Villa Bosch</li>
+                <li>Martín Coronado</li>
+                <li>Ciudad Jardín</li>
+                <li>Barrio Altos de Podestá</li>
+              </ul>
+            </div>
+            <div class='zone-column'>
+              <h4>Sur</h4>
+              <ul>
+                <li>Ciudadela</li>
+                <li>José Ingenieros</li>
+                <li>Villa Raffo</li>
+              </ul>
+            </div>
+            <div class='zone-column'>
+              <h4>Este</h4>
+              <ul>
+                <li>Sáenz Peña</li>
+                <li>Santos Lugares</li>
+              </ul>
+            </div>
+            <div class='zone-column'>
+              <h4>Caseros</h4>
+              <ul>
+                <li>Caseros</li>
+              </ul>
+            </div>
+          </div>
+          <h3>Macrozonas de Desarrollo Prioritario </h3>
+          <p>Las Macrozonas de Desarrollo Prioritario (MDP) constituyen sectores o inmuebles, que estando desocupados o subutilizados, son objeto de políticas que buscan cohibir el uso especulativo y fomentar el desarrollo o construcción, de modo de aprovechar la existencia de infraestructura y expandir la oferta inmobiliaria para usos residenciales o comerciales. El objetivo de las MDP es concentrar el crecimiento urbano en densidades adecuadas y priorizando el completamiento del tejido urbano.</p>
+        ")
+      )
     )
   )
 )
+
+
+  )
+
+    
+  
+

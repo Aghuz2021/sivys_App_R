@@ -4,14 +4,16 @@ sidebarUI <- dashboardSidebar(
     menuItem("Home", 
               icon = icon("home"), 
               startExpanded = FALSE,
-              tabName = "home"
+              tabName = "Home"
 
     ),
     menuItem("Venta de casas", icon = icon("home"), startExpanded = FALSE,
-             menuSubItem("Cantidad de publicaciones", tabName = "venta_casa"),
-             menuSubItem("Cantidad de m² publicados", tabName = "Cantidad_m²"),
-             menuSubItem("Mediana de valor en usd por localidad.", tabName = "MEDIANA"),
-             menuSubItem("Mediana de valor en usd por Zona agrupada", tabName = "mediana_za_casa")
+             menuSubItem("1.Cantidad de publicaciones", tabName = "venta_casa"),
+             menuSubItem("2.Cantidad de m² publicados", tabName = "Cantidad_m²"),
+             menuSubItem("3.Mediana de valor en usd por localidad.", tabName = "MEDIANA"),
+             menuSubItem("4.Mediana de valor en usd por Zona agrupada", tabName = "mediana_za_casa"),
+            menuSubItem("luu", tabName = "mediana_za_casa")
+            
              
 
     ),
