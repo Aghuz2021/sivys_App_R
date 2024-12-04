@@ -8,8 +8,9 @@ library(bslib)
 library(dplyr)
 library(reactable)
 library(tidyr)
+library(sf)
 
-archivo <- read.csv("C://Users//Usuario//Desktop//APP_Syvis//bd//sivys_bd.csv",fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+archivo <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//sivys_bd.csv",fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 
 archivo$dolares <- as.numeric(archivo$precio_dolares)
 
@@ -26,6 +27,8 @@ archivo$dolares <- as.numeric(archivo$precio_dolares)
 localidades <- unique(archivo$nombre)
 fechas_formateadas <- unique(archivo$fecha)
 zonas_agrupadas <- unique(archivo$zona_agrupada)
+ambientes <- unique(archivo$Ambientes)
+tipo_de_propiedad <-  unique(archivo$Tipo_propiedad)
 
 # Cargar UI y Server
 source("ui/header.R")

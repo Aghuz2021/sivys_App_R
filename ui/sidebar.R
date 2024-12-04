@@ -29,11 +29,17 @@ sidebarUI <- dashboardSidebar(
     ),
     menuItem("Alquiler de departamento", icon = icon("building"), startExpanded = FALSE,
              menuSubItem("Cantidad de publicaciones", tabName = "alquiler_Depto"),
-             menuSubItem("", tabName = "alquiler_nuevo")
+             menuSubItem("Cantidad de m²", tabName = "alquiler_m2"),
+             menuSubItem("Cantidad de m² por ZA", tabName = "alquiler_m2_ZA"),
+             menuSubItem("Mediana de valor de las publicaciones por ZA", tabName = "alquiler_mediana_ZA"),
+             menuSubItem("(RIPTE) necesarios para comprar un depto de 45 m²", tabName = "alquiler_RIPTE"),
+             menuSubItem("(SMVM) necesarios para comprar un depto de 45 m²", tabName = "alquiler_SMVM")
     ),
     menuItem("Macrozonas Desarrollo Prioritario", icon = icon("building"), startExpanded = FALSE,
-             menuSubItem("Cantidad de publicaciones", tabName = "alquiler_Depto"),
-             menuSubItem("", tabName = "alquiler_nuevo")
+             menuSubItem("Cantidad de publicaciones", tabName = "MDP_pub_venta"),
+             menuSubItem("Cantidad de publicaciones en departamentos", tabName = "MDP_depto_alq"),
+             menuSubItem("Mediana de valor (en US$) del m²", tabName = "MDP_mediana_m2"),
+             menuSubItem("Mediana de valor (en pesos) de las publicaciones", tabName = "MDP_mediana")
     )
   )
 )
