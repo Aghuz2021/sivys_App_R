@@ -1,0 +1,73 @@
+/* Estilos para el header */
+.skin-blue .main-header .logo {
+    background-color: #374850;
+    color: #fff;
+    border-bottom: 0 solid transparent;
+ }
+  
+  /* Estilos para el sidebar */
+  .skin-blue .main-sidebar {
+    background-color: #ffffff;
+    box-shadow: 6px -2px 14px rgba(0, 0, 0, 0.5);
+  }
+  
+  .skin-blue .main-sidebar .sidebar .sidebar-menu .treeview-menu > li > a {
+    color: #000000; /* Cambia el color del texto de los elementos del sidebar */
+  }
+  
+  .skin-blue .main-header .navbar {
+    background-color: #374850;
+  }
+  
+  .box.box-solid.box-primary > .box-header {
+    background-color: #374850;
+  }
+  
+  .skin-blue .sidebar a {
+    color: #000000;
+  }
+  
+  .modal-body {
+    font-size: 15px;
+  }
+  
+  .skin-blue .sidebar-menu > li > .treeview-menu {
+    margin: 0 1px;
+    background: #b1b1b11c;
+    color: #000000;
+  }
+  
+  .skin-blue .treeview-menu > li.active > a,
+  .skin-blue .treeview-menu > li > a:hover {
+    color: #3c8dbc;
+  }
+  
+  .skin-blue .sidebar-menu > li.active > a,
+  .skin-blue .sidebar-menu > li:hover > a {
+    color: #fff;
+    background: #486572;
+    border-left-color: #ffa009;
+  }
+  
+  .skin-blue .sidebar-menu > li > a {
+    border-left: 12px solid transparent;
+  }
+  
+  .selectize-input {
+    color: #007bff;
+    background-color: #3c8dbc21;
+  }
+  
+  .selectize-dropdown .option:hover {
+    background-color: #3c8dbc21;
+  }
+  
+  .selectize-control.multi .selectize-input > div {
+    cursor: pointer;
+    margin: 0 3px 3px 0;
+    padding: 1px 5px;
+    background: #f9ffa5;
+    color: #333;
+    border: 0 solid rgba(0, 0, 0, 0);
+  }
+  

@@ -1,19 +1,17 @@
 bodyUI <- dashboardBody(
-
-   tags$head(
-      tags
-     
-$style(HTML("
+  tags$head(
+    tags$style(HTML("
         .skin-blue .main-header .logo {
-          background-color: #374850; 
+          background-color: #374850;
           color: #fff;
-          border-bottom: 0 solid transparent; 
+          border-bottom: 0 solid transparent;
         }
         /* Estilos para el sidebar */
         .skin-blue .main-sidebar {
-          background-color: #ffffff; /* Cambia este color según tus necesidades */
-        }
-        
+          background-color: #ffffff;
+           box-shadow: 6px -2px 14px rgba(0, 0, 0, 0.5);
+          }
+
         .skin-blue .main-sidebar .sidebar .sidebar-menu .treeview-menu > li > a {
           color: ##000000; /* Cambia el color del texto de los elementos del sidebar */
         }
@@ -51,158 +49,161 @@ background-color: #fffff;
 }.skin-blue .sidebar-menu>li>a {
     border-left: 12px solid transparent;
 }
-   
-      "
-      ))
-    ),
+   .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px;
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+      "))
+  ),
   tabItems(
     # Tab para "Venta de casas"
-    tabItem(tabName = "venta_casa",
-            fluidRow(
-              tags$style(HTML("
-                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
-                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
-                .selectize-control.multi .selectize-input>div {
-                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
-                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
-                }
-              ")),
-              box(
-                title = "Cantidad de publicaciones de ventas de casas",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                selectInput("localidad_casa", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_casa", "Selecciona una o más fechas:", 
-                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                plotOutput("plot_casa", height = "300px")
-              ),
-              box(
-                title = "Tabla dinámica de publicaciones de ventas de casas",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                reactableOutput("table_casa") 
-              )
-            )
+    tabItem(
+      tabName = "venta_casa",
+      fluidRow(
+        box(
+          title = "Cantidad de publicaciones de ventas de casas",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_casa", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_casa", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_casa", height = "300px")
+        ),
+        box(
+          title = "Tabla dinámica de publicaciones de ventas de casas",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_casa")
+        )
+      )
     ),
-    
+
     # Tab para "Cantidad m²"
-    tabItem(tabName = "Cantidad_m²",
-            fluidRow(
-              tags$style(HTML("
-                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
-                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
-                .selectize-control.multi .selectize-input>div {
-                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
-                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
-                }
-              ")),
-              box(
-                title = "Cantidad de publicaciones de ventas por metro cuadrado",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                selectInput("localidad_m2", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_m2", "Selecciona una o más fechas:", 
-                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                plotOutput("plot_m2", height = "300px")
-              ),
-              box(
-                title = "Tabla dinámica de publicaciones de ventas por metro cuadrado",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                reactableOutput("table_m2")
-              )
-            )
+    tabItem(
+      tabName = "Cantidad_m²",
+      fluidRow(
+        box(
+          title = "Cantidad de publicaciones de ventas por metro cuadrado",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_m2", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_m2", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_m2", height = "300px")
+        ),
+        box(
+          title = "Tabla dinámica de publicaciones de ventas por metro cuadrado",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_m2")
+        )
+      )
     ),
-    
+
     # Tab para "Mediana de precio en USD"
-    tabItem(tabName = "MEDIANA",
-            fluidRow(
-              tags$style(HTML("
-                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
-                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
-                .selectize-control.multi .selectize-input>div {
-                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
-                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
-                }
-              ")),
-              box(
-                title = "Mediana de Precio en USD de Casas en Venta",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                selectInput("localidad_mediana_usd", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_mediana_usd", "Selecciona una o más fechas:", 
-                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                plotOutput("plot_mediana_usd_por_localidad", height = "300px")
-              ),
-                box(
-                title = "Tabla dinámica de publicaciones de ventas por metro cuadrado",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                reactableOutput("table_usd_por_localidad")
-              )
-            )
-    ),
-    tabItem(tabName = "mediana_za_casa",
-            fluidRow(
-              tags$style(HTML("
-                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
-                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
-                .selectize-control.multi .selectize-input>div {
-                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
-                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
-                }
-              ")),
-              box(
-                title = " ",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                selectInput("zona_agrupada_casa", "Seleccionar zonas agrupadas:", 
-                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_zona_agrupada_Casa", "Selecciona una o más fechas:", 
-                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                plotOutput("plot_mediana_usd_por_za", height = "300px")
-              )
-            )
-    ),
-    tabItem(tabName = "cantidad_public_depto",
-            fluidRow(
-              tags$style(HTML("
-                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
-                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
-                .selectize-control.multi .selectize-input>div {
-                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
-                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
-                }
-              ")),
-              box(
-                title = "cantidad de publicciones depto",
-                status = "primary",
-                solidHeader = TRUE,
-                width = 12,
-                selectInput("localidad_depto", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_depto", "Selecciona una o más fechas:", 
-                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                plotOutput("plot_depto", height = "300px")
-              )
-            )
+    tabItem(
+      tabName = "MEDIANA",
+      fluidRow(
+        box(
+          title = "Mediana de Precio en USD de Casas en Venta",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_mediana_usd", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_mediana_usd", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_mediana_usd_por_localidad", height = "300px")
+        ),
+        box(
+          title = "Tabla dinámica de publicaciones de ventas por metro cuadrado",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_usd_por_localidad")
+        )
+      )
     ),
     tabItem(
-  tabName = "Home",
-  fluidRow(
-    # Estilos para mejorar la apariencia
-    tags$style(HTML("
-    .info-box-content  { 
+      tabName = "mediana_za_casa",
+      fluidRow(
+        box(
+          title = "Mediana de valor en usd por Zona agrupada de casas en venta ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("zona_agrupada_casa", "Seleccionar zonas agrupadas:",
+            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]
+          ),
+          selectInput("fecha_zona_agrupada_Casa", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_mediana_usd_por_za", height = "300px")
+        ),
+        box(
+          title = " Tabla dinamica mediana de valor (en US$) del m² por ZA. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_mediana_usd_za_casa")
+        )
+      )
+    ), # Tab para "Mediana de precio en USD"
+    tabItem(
+      tabName = "mediana_za_m2_casa",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("za_mediana_usd_m2", "Selecciona una o más localidades:",
+            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]
+          ),
+          selectInput("fecha_mediana_usd_m2", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_mediana_usd_por_m2_za", height = "300px")
+        )
+      )
+    ),
+    tabItem(
+      tabName = "cantidad_public_depto",
+      fluidRow(
+        box(
+          title = "cantidad de publicciones depto",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_depto", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_depto", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_depto", height = "300px")
+        )
+      )
+    ),
+    tabItem(
+      tabName = "Home",
+      fluidRow(
+        # Estilos para mejorar la apariencia
+        tags$style(HTML("
+    .info-box-content  {
         padding: 0px 26px;
         margin-left: 0px;
       }
@@ -212,14 +213,14 @@ background-color: #fffff;
     color: white;
     padding: 7px;
     }
-      .info-box-content p { 
-        font-size: 14px; 
-        line-height: 1.5; 
+      .info-box-content p {
+        font-size: 14px;
+        line-height: 1.5;
       }
       .zones-container {
-        display: flex; 
-        flex-wrap: wrap; 
-        gap: 20px; 
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
         justify-content: space-around;
       }
       .zone-column {
@@ -232,7 +233,7 @@ background-color: #fffff;
         border-radius: 10px;
       }
       .zone-column ul {
-        padding-left: 20px; 
+        padding-left: 20px;
       }
       @media (max-width: 768px) {
         .zone-column {
@@ -240,19 +241,19 @@ background-color: #fffff;
         }
       }
     ")),
-    # Información descriptiva
-    
-      div(
-        class = "info-box-content",
-        HTML("
+        # Información descriptiva
+
+        div(
+          class = "info-box-content",
+          HTML("
           <h3>Objetivos</h3>
           <p>
-            El Sistema de Información de Vivienda y Suelo de Tres de Febrero (SIVyS) permite reunir, producir, analizar y difundir datos relacionados con la situación de la vivienda y el suelo del Municipio, 
+            El Sistema de Información de Vivienda y Suelo de Tres de Febrero (SIVyS) permite reunir, producir, analizar y difundir datos relacionados con la situación de la vivienda y el suelo del Municipio,
             así como conocer la situación habitacional de las familias y cuantificar la valorización del suelo producto de la intervención pública municipal.
           </p>
           <p>
-            Este Monitor Periódico de Indicadores tiene como objetivo relevar las dinámicas del mercado inmobiliario dentro del Partido de Tres de Febrero, 
-            mediante la revisión de los datos recolectados en publicaciones (de operaciones de alquiler y compra-venta de viviendas) realizadas en Mercado Libre, 
+            Este Monitor Periódico de Indicadores tiene como objetivo relevar las dinámicas del mercado inmobiliario dentro del Partido de Tres de Febrero,
+            mediante la revisión de los datos recolectados en publicaciones (de operaciones de alquiler y compra-venta de viviendas) realizadas en Mercado Libre,
             procesados por la Fundación Universidad de San Andrés y la Municipalidad para su mejor manipulación.
           </p>
           <h3>Fuente de información y tratamiento de la base de datos</h3>
@@ -331,14 +332,26 @@ background-color: #fffff;
           <h3>Macrozonas de Desarrollo Prioritario </h3>
           <p>Las Macrozonas de Desarrollo Prioritario (MDP) constituyen sectores o inmuebles, que estando desocupados o subutilizados, son objeto de políticas que buscan cohibir el uso especulativo y fomentar el desarrollo o construcción, de modo de aprovechar la existencia de infraestructura y expandir la oferta inmobiliaria para usos residenciales o comerciales. El objetivo de las MDP es concentrar el crecimiento urbano en densidades adecuadas y priorizando el completamiento del tejido urbano.</p>
         ")
+        )
+      )
+    ),
+    tabItem(
+      tabName = "mediana_localidad_m2_casa",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("m2_localidad_casa", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_m2_localidad_casa", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_mediana_usd_por_m2_localidad ", height = "300px")
+        )
       )
     )
   )
 )
-
-
-  )
-
-    
-  
-

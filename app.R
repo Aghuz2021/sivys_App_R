@@ -9,18 +9,11 @@ library(dplyr)
 library(reactable)
 library(tidyr)
 
-archivo <- read.csv("C://Users//Usuario//Desktop//APP_Syvis//bd//sivys_bd.csv",fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 
+archivo <- read.csv("C://Users//Usuario//Desktop//APP_Syvis//bd//sivys_bd.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 archivo$dolares <- as.numeric(archivo$precio_dolares)
 
-# datos_filtrados <- archivo %>% 
-#   filter(Tipo_propiedad == "Casa", Tipo_operacion == "Venta") %>% 
-#   group_by(nombre, fecha) %>%  # Agrupar por 'nombre' y 'fecha'
-#   summarise(
-#     precio_dolares = median(precio_dolares, na.rm = TRUE),  # Calcular mediana si hay más de 20 publicaciones
-#     .groups = "drop"
-#   )
-
+#View(archivo)
 
 # Localidades de Tres de Febrero
 localidades <- unique(archivo$nombre)
@@ -31,9 +24,6 @@ zonas_agrupadas <- unique(archivo$zona_agrupada)
 source("ui/header.R")
 source("ui/sidebar.R")
 source("ui/body.R")
-
-
-
 
 ui <- dashboardPage(
   header = headerUI,
@@ -51,13 +41,23 @@ server <- function(input, output, session) {
       footer = modalButton("Cerrar")
     ))
   })
-  
-  source("plots/plot_venta_Casa.R", local = TRUE)
 
+  source("plots/plot_venta_Casa.R", local = TRUE)
 }
 
 
 # Ejecutar la aplicación
 shinyApp(ui = ui, server = server)
+
+
+
+
+
+
+
+
+
+
+
 
 

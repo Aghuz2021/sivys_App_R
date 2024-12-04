@@ -1,9 +1,11 @@
 # Función para filtrar según tipo de propiedad y operación
+# Cargar el script de gráficos
 filtro_propiedad_operacion <- function(Tipo_propiedad, Tipo_operacion) {
   archivo %>%
     filter(Tipo_propiedad == !!Tipo_propiedad, 
            Tipo_operacion == !!Tipo_operacion)
 }
+
 
 # Gráfico de Casas en Venta
 output$plot_casa <- renderPlot({
@@ -107,6 +109,7 @@ output$plot_mediana_usd_por_localidad <- renderPlot({
           legend.title = element_text(size = 10),
           legend.text = element_text(size = 9))
 })
+
 output$table_usd_por_localidad <- renderReactable({
     datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
         filter(nombre %in% input$localidad_mediana_usd, 
@@ -146,22 +149,31 @@ output$plot_depto <- renderPlot({
           legend.title = element_text(size = 10),
           legend.text = element_text(size = 9))
 })
+
+
 output$plot_mediana_usd_por_za <- renderPlot({
   # Filtrar los datos según las localidades y fechas seleccionadas
   datos_filtrados <- archivo %>%
-    filter(Tipo_propiedad == "Casa", Tipo_operacion == "Venta", 
-           zona_agrupada %in% input$localidad_mediana_usd_za, 
-           fecha %in% input$fecha_mediana_usd_za) %>%
+    filter(
+      Tipo_propiedad == "Casa", 
+      Tipo_operacion == "Venta", 
+      zona_agrupada %in% input$zona_agrupada_casa, 
+      fecha %in% input$fecha_zona_agrupada_Casa
+    ) %>%
     group_by(zona_agrupada, fecha) %>%
     summarise(
-      Tipo_propiedad = n(),  # Contar publicaciones
-      precio_dolares = if_else( Tipo_propiedad > 20, median(precio_dolares, na.rm = TRUE), NA_real_), 
+      cantidad_propiedades = n(),  # Contar publicaciones
+      precio_dolares = if_else(cantidad_propiedades > 20, median(precio_dolares, na.rm = TRUE), NA_real_), 
       .groups = "drop"
     ) %>%
     filter(!is.na(precio_dolares))  # Filtrar filas donde se calculó la mediana
 
   print(datos_filtrados)  # Verifica el contenido de datos_filtrados
-  
+
+  if (nrow(datos_filtrados) == 0) {
+    return(NULL)  # No generar gráfico si no hay datos
+  }
+
   # Crear el gráfico de línea de la mediana de precio en dólares por localidad
   ggplot(datos_filtrados, aes(x = fecha, y = precio_dolares, color = zona_agrupada, group = zona_agrupada)) +
     geom_line(size = 1) +
@@ -170,6 +182,93 @@ output$plot_mediana_usd_por_za <- renderPlot({
     labs(title = "Mediana de Precio en USD de Casas en Venta por Localidad",
          x = "Fecha",
          y = "Mediana de Precio (USD)") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 14),
+          axis.title.x = element_text(size = 12),
+          axis.title.y = element_text(size = 12),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 9))
+})
+
+output$table_mediana_usd_za_casa <- renderReactable({
+    datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+        filter(zona_agrupada %in% input$zona_agrupada_casa, 
+               fecha %in% input$fecha_zona_agrupada_Casa) %>%
+        group_by(zona_agrupada, fecha) %>%
+        summarise(
+            precio_dolares = if_else(n() > 20, median(precio_dolares, na.rm = TRUE), NA_real_), 
+            .groups = "drop"
+        ) %>%
+        filter(!is.na(precio_dolares)) %>%
+        pivot_wider(names_from = fecha, values_from = precio_dolares, values_fill = 0)
+    
+    reactable(datos_filtrados)
+})
+
+# ---Mediana de valor en usd del m² por ZA.
+output$plot_mediana_usd_por_m2_za <- renderPlot({
+  # Filtrar los datos según las localidades y fechas seleccionadas
+  datos_filtrados <- archivo %>%
+    filter(
+      Tipo_propiedad == "Casa", 
+      Tipo_operacion == "Venta", 
+      zona_agrupada %in% input$za_mediana_usd_m2, 
+      fecha %in% input$fecha_mediana_usd_m2
+    ) %>%
+    group_by(zona_agrupada, fecha) %>%
+    summarise(
+      cantidad_propiedades = n(),  # Contar publicaciones
+      dolares_m2total = if_else(cantidad_propiedades > 20, median(dolares_m2total, na.rm = TRUE), NA_real_), 
+      .groups = "drop"
+    ) %>%
+    filter(!is.na(dolares_m2total))  # Filtrar filas donde se calculó la mediana
+
+  print(datos_filtrados)  # Verifica el contenido de datos_filtrados
+
+  # Crear el gráfico de línea de la mediana de precio en dólares por localidad
+  ggplot(datos_filtrados, aes(x = fecha, y = dolares_m2total, color = zona_agrupada, group = zona_agrupada)) +
+    geom_line(size = 1) +
+    geom_point(size = 2) +
+    geom_text(aes(label = round(dolares_m2total, 2)), vjust = -0.5, size = 4) +
+    labs(title = "",
+         x = "Fecha",
+         y = "Mediana de m2 (USD)") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 14),
+          axis.title.x = element_text(size = 12),
+          axis.title.y = element_text(size = 12),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 9))
+})
+
+
+
+
+
+output$plot_mediana_usd_por_m2_localidad <- renderPlot({
+  # Filtrar los datos según las localidades y fechas seleccionadas
+  datos_filtrados <- archivo %>%
+    filter(Tipo_propiedad == "Casa", Tipo_operacion == "Venta", 
+           nombre %in% input$m2_localidad_casa, 
+           fecha %in% input$fecha_m2_localidad_casa) %>%
+    group_by(nombre, fecha) %>%
+    summarise(
+      cantidad_propiedades = n(),  # Contar publicaciones
+      dolares_m2total = if_else( cantidad_propiedades > 20, median(dolares_m2total, na.rm = TRUE), NA_real_), 
+      .groups = "drop"
+    ) %>%
+    filter(!is.na(dolares_m2total))  # Filtrar filas donde se calculó la mediana
+
+  print(datos_filtrados)  # Verifica el contenido de datos_filtrados
+  
+  # Crear el gráfico de línea de la mediana de precio en dólares por localidad
+  ggplot(datos_filtrados, aes(x = fecha, y = dolares_m2total, color = nombre, group = nombre)) +
+    geom_line(size = 1) +
+    geom_point(size = 2) +
+    geom_text(aes(label = round(dolares_m2total, 2)), vjust = -0.5, size = 4) +
+    labs(title = "",
+         x = "Fecha",
+         y = "") +
     theme_minimal() +
     theme(plot.title = element_text(size = 14),
           axis.title.x = element_text(size = 12),
