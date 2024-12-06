@@ -11,8 +11,11 @@ library(tidyr)
 library(sf)
 
 archivo <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//sivys_bd.csv",fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+salario_minimo <-  read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//SMVM.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+ripte <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//RIPTE.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 
 archivo$dolares <- as.numeric(archivo$precio_dolares)
+
 
 # datos_filtrados <- archivo %>% 
 #   filter(Tipo_propiedad == "Casa", Tipo_operacion == "Venta") %>% 
@@ -62,5 +65,6 @@ server <- function(input, output, session) {
 
 # Ejecutar la aplicación
 shinyApp(ui = ui, server = server)
+
 
 

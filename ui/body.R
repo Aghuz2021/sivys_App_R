@@ -272,8 +272,8 @@ background-color: #fffff;
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
-                selectInput("localidad_depto_m2_ZA", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
+                selectInput("zona_depto_m2_ZA", "Selecciona una o más localidades:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
                 selectInput("fecha_depto_m2_ZA", "Selecciona una o más fechas:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_alq_m2_ZA", height = "300px")
@@ -302,8 +302,8 @@ background-color: #fffff;
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
-                selectInput("localidad_mediana_ZA", "Selecciona una o más localidades:", 
-                            choices = localidades, multiple = TRUE, selected = localidades[1]),
+                selectInput("zona_mediana_ZA", "Selecciona una o más localidades:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
                 selectInput("fecha_mediana_ZA", "Selecciona una o más fechas:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 selectInput("ambientes_mediana_ZA", "Selecciona la cantidad de ambientes:", 
@@ -316,6 +316,66 @@ background-color: #fffff;
                 solidHeader = TRUE,
                 width = 12,
                 reactableOutput("table_mediana_ZA")
+              )
+            )
+    ),
+    tabItem(tabName = "alquiler_RIPTE",
+            fluidRow(
+              tags$style(HTML("
+                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+                }
+              ")),
+              box(
+                title = "Incidecia del costo del alquiler en el salario RIPTE",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                selectInput("zona_RIPTE", "Selecciona una o más zonas:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
+                selectInput("fecha_RIPTE", "Selecciona una o más fechas:", 
+                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
+                plotOutput("plot_RIPTE", height = "300px")
+              ),
+              box(
+                title = "Tabla dinámica de la Incidencia del Costo del Alquiler en el Salario RIPTE",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                reactableOutput("table_RIPTE")
+              )
+            )
+    ),
+    tabItem(tabName = "alquiler_SMVM",
+            fluidRow(
+              tags$style(HTML("
+                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+                }
+              ")),
+              box(
+                title = "Incidecia del costo del alquiler en el salario SMVM",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                selectInput("zona_SMVM", "Selecciona una o más zonas:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
+                selectInput("fecha_SMVM", "Selecciona una o más fechas:", 
+                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
+                plotOutput("plot_SMVM", height = "300px")
+              ),
+              box(
+                title = "Tabla dinámica de la Incidencia del Costo del Alquiler en el Salario SMVM",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                reactableOutput("table_SMVM")
               )
             )
     ),
@@ -424,7 +484,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("fecha_MDP_mediana", "Selecciona una o más fechas:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
-                selectInput("ambientes_mediana", "Selecciona la cantidad de ambientes:", 
+                selectInput("ambientes_MDP_mediana", "Selecciona la cantidad de ambientes:", 
                             choices = ambientes, multiple = TRUE, selected = ambientes[1]),
                 plotOutput("plot_MDP_mediana", height = "300px")
               ),
