@@ -8,7 +8,7 @@ bodyUI <- dashboardBody(
         }
         /* Estilos para el sidebar */
         .skin-blue .main-sidebar {
-          background-color: #ffffff;
+          background-color: #f4fbff;
            box-shadow: 6px -2px 14px rgba(0, 0, 0, 0.5);
           }
 
@@ -180,6 +180,21 @@ background-color: #fffff;
         )
       )
     ),
+     tabItem(
+      tabName = "ripte_casa_venta",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("fecha_ripte_venta", "Selecciona una o más fechas:",
+            choices = fechas_ripte, multiple = TRUE, selected = fechas_ripte[1]
+          ),
+          plotOutput("plot_ripte_necesario", height = "300px")
+        )
+      )
+    ),
     tabItem(
       tabName = "cantidad_public_depto",
       fluidRow(
@@ -245,6 +260,9 @@ background-color: #fffff;
 
         div(
           class = "info-box-content",
+          HTML("<h3>Mapa de Tres de Febrero con sus localidades.</h3>"),
+          
+           leafletOutput("mapa", height = "400px"),
           HTML("
           <h3>Objetivos</h3>
           <p>
@@ -331,7 +349,8 @@ background-color: #fffff;
           </div>
           <h3>Macrozonas de Desarrollo Prioritario </h3>
           <p>Las Macrozonas de Desarrollo Prioritario (MDP) constituyen sectores o inmuebles, que estando desocupados o subutilizados, son objeto de políticas que buscan cohibir el uso especulativo y fomentar el desarrollo o construcción, de modo de aprovechar la existencia de infraestructura y expandir la oferta inmobiliaria para usos residenciales o comerciales. El objetivo de las MDP es concentrar el crecimiento urbano en densidades adecuadas y priorizando el completamiento del tejido urbano.</p>
-        ")
+        "),
+        leafletOutput("macrozonas", height = "400px"),
         )
       )
     ),
@@ -349,8 +368,83 @@ background-color: #fffff;
           selectInput("fecha_m2_localidad_casa", "Selecciona una o más fechas:",
             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
           ),
-          plotOutput("plot_mediana_usd_por_m2_localidad ", height = "300px")
+          plotOutput("plot_mediana_usd_por_m2_localidad", height = "300px")
         )
+      )
+    ),
+    tabItem(
+      tabName = "depto_m2_publicados",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_m2_departamento", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_m2_departamento", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_m2_departamento", height = "300px")
+        ),
+        box(
+          title = " Tabla dinamica de cantidad de m² por Localidad. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_m2_departamento")
+        )
+        
+      )
+    ),
+    tabItem(
+      tabName = "depto_mediana_localidad",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("localidad_mediana_departamento", "Selecciona una o más localidades:",
+            choices = localidades, multiple = TRUE, selected = localidades[1]
+          ),
+          selectInput("fecha_mediana_departamento", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+          plotOutput("plot_mediana_departamento", height = "300px")
+        ),
+        box(
+          title = " Tabla dinamica de cantidad de m² por Localidad. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_mediana_localidad_departamento")
+        )
+        
+      )
+    ),
+    tabItem(
+      tabName = "publicaciones_ambiente_za_depto",
+      fluidRow(
+        box(
+          title = " ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("depto_ambientes_za", "Selecciona una o más localidades:",
+            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]
+          ),
+          selectInput("depto_ambientes_fecha", "Selecciona una o más fechas:",
+            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
+          ),
+           selectInput("depto_ambientes", "Selecciona un ambiente:",
+            choices = ambientes, multiple = TRUE, selected = ambientes[1]
+           ),
+          plotOutput("cantidad_publicaciones_ambiente_za_depto", height = "300px")
+        )
+        
+        
       )
     )
   )
