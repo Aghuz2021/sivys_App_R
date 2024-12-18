@@ -208,7 +208,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Cantidad de publicaciones de departamentos en alquiler",
+                title = "Cantidad de publicaciones de departamentos en alquiler por localidad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -219,7 +219,7 @@ background-color: #fffff;
                 plotOutput("plot_alq", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de publicaciones de departamentos en alquiler",
+                title = "Tabla dinámica de publicaciones de departamentos en alquiler por localidad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -238,7 +238,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Cantidad de m² de departamentos en alquiler",
+                title = "Cantidad de m² de las publicaciones de departamentos en alquiler por localidad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -249,7 +249,7 @@ background-color: #fffff;
                 plotOutput("plot_alq_m2", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de m² de departamentos en alquiler",
+                title = "Tabla dinámica de m² de las publicaciones de departamentos en alquiler por localidad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -268,7 +268,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Cantidad de m² de departamentos en alquiler por ZA",
+                title = "Cantidad de m² de las publicaciones de departamentos en alquiler por ZA",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -279,7 +279,7 @@ background-color: #fffff;
                 plotOutput("plot_alq_m2_ZA", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de m² de departamentos en alquiler por ZA",
+                title = "Tabla dinámica de m² de las publicaciones de departamentos en alquiler por ZA",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -298,7 +298,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Mediana de valor (en pesos ARS) de departamentos en alquiler por ZA",
+                title = "Mediana de valor (en pesos ARS) de las publicaciones de departamentos en alquiler según cantidad de ambientes por ZA",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -311,7 +311,7 @@ background-color: #fffff;
                 plotOutput("plot_mediana_ZA", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de la mediana de valor (en pesos ARS) de departamentos en alquiler por ZA",
+                title = "Tabla dinámica de la mediana de valor (en pesos ARS) de las publicaciones de departamentos en alquiler según cantidad de ambientes por ZA",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -330,7 +330,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Incidecia del costo del alquiler en el salario RIPTE",
+                title = "Incidecia del costo del alquiler en el salario (RIPTE)",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -341,7 +341,7 @@ background-color: #fffff;
                 plotOutput("plot_RIPTE", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de la Incidencia del Costo del Alquiler en el Salario RIPTE",
+                title = "Tabla dinámica de RIPTE",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -360,7 +360,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Incidecia del costo del alquiler en el salario SMVM",
+                title = "Incidencia del costo del alquiler en el salario (SMVM)",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -371,7 +371,7 @@ background-color: #fffff;
                 plotOutput("plot_SMVM", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de la Incidencia del Costo del Alquiler en el Salario SMVM",
+                title = "Tabla dinámica de SMVM",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -390,7 +390,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Cantidad de publicaciones",
+                title = "Cantidad de publicaciones de viviendas en venta según tipo de propiedad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -401,7 +401,7 @@ background-color: #fffff;
                 plotOutput("plot_MDP_pub", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de cantidad de publicaciones",
+                title = "Tabla dinámica de cantidad de publicaciones de viviendas en venta según tipo de propiedad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -420,7 +420,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Cantidad de publicaciones de departamentos",
+                title = "Cantidad de publicaciones de departamentos en alquiler",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -429,7 +429,7 @@ background-color: #fffff;
                 plotOutput("plot_MDP_depto_alq", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de cantidad de publicaciones de departamentos",
+                title = "Tabla dinámica de cantidad de publicaciones de departamentos en alquiler",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -448,7 +448,7 @@ background-color: #fffff;
                 }
               ")),
               box(
-                title = "Mediana de valor (en US$) del m²",
+                title = "Mediana de valor (en US$) del m² de las publicaciones de viviendas en venta según tipo de propiedad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
@@ -459,7 +459,7 @@ background-color: #fffff;
                 plotOutput("plot_MDP_mediana_m2", height = "300px")
               ),
               box(
-                title = "Tabla dinámica de la mediana de valor (en US$) del m²",
+                title = "Tabla dinámica de la mediana de valor (en US$) del m² de las publicaciones de viviendas en venta según tipo de propiedad",
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,

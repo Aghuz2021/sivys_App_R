@@ -12,10 +12,14 @@ library(sf)
 
 archivo <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//sivys_bd.csv",fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 salario_minimo <-  read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//SMVM.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
-ripte <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//RIPTE.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+ripte <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//RIPTE.csv", sep = ";", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+smvm <- read.csv("C://Users//Usuario//Documents//vf//sivys_App_R//bd//SMVM.csv", sep = ";", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 
 archivo$dolares <- as.numeric(archivo$precio_dolares)
+ripte$promedio <- as.numeric(gsub("[^0-9.]", "", ripte$promedio))
+smvm$promedio <- as.numeric(gsub("[^0-9.]", "", smvm$promedio))
 
+options(scipen = 999)
 
 # datos_filtrados <- archivo %>% 
 #   filter(Tipo_propiedad == "Casa", Tipo_operacion == "Venta") %>% 
@@ -68,3 +72,6 @@ shinyApp(ui = ui, server = server)
 
 
 
+print(names(ripte))
+str(archivo)
+str(ripte)
