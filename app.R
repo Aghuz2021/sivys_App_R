@@ -1,14 +1,5 @@
 # Cargar librerías
-library(shiny)
-library(shinydashboard)
-library(ggplot2)
-library(leaflet)
-library(geojsonio)
-library(bslib)
-library(dplyr)
-library(reactable)
-library(tidyr)
-library(sf)
+source("Librerias/librerias.r")
 
 archivo <- read.csv("C://Users//Agustin//Documents//sivys_App_R//bd//sivys_bd.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
 archivo2 <- read.csv("C://Users//Agustin//Documents//sivys_App_R//bd//ripte(data).csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
@@ -20,14 +11,9 @@ tres_de_febrero <- st_read(geojson_path)
 print(tres_de_febrero)
 macrozonas <- st_read(geojson_macrozonas)
 
+# Transformar la columna dolares_m2total a entero
+archivo$dolares_m2total <- as.integer(gsub("[,.]", "", archivo$dolares_m2total))
 
-archivo$dolares <- as.numeric(archivo$precio_dolares)
-
-
-archivo$dolares_m2total <- gsub("\\s", "", archivo$dolares_m2total)  # Eliminar espacios
-archivo$dolares_m2total <- gsub("\\.", "", archivo$dolares_m2total)  # Eliminar puntos (miles)
-  archivo$dolares_m2total <- gsub(",", ".", archivo$dolares_m2total)  # Cambiar comas a puntos (decimales)
-  archivo$dolares_m2total <- as.numeric(archivo$dolares_m2total)
 
 
 
@@ -61,11 +47,23 @@ server <- function(input, output, session) {
       footer = modalButton("Cerrar")
     ))
   })
-  
+  source("plots/home/plot_mapas_home.R", local = TRUE)
+  source("plots/casa/cant_casas.R", local = TRUE)
+  source("plots/casa/cant_m2.R", local = TRUE)
+  source("plots/casa/mediana_usd.R", local = TRUE)
+  source("plots/casa/mediana_usd_za.R", local = TRUE)
+  source("plots/casa/mediana_usd_m2_za.R", local = TRUE)
   source("plots/plot_venta_Casa.R", local = TRUE)
 
 }
 
 # Ejecutar la aplicación
 shinyApp(ui = ui, server = server)
+
+
+
+
+
+
+
 
