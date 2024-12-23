@@ -10,12 +10,14 @@ library(reactable)
 library(tidyr)
 library(sf)
 
-archivo <- read.csv("C://Users//Usuario//Documents//GitHub//sivys_App_R//bd//sivys_bd.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
-archivo2 <- read.csv("C://Users//Usuario//Documents//GitHub//sivys_App_R//bd//ripte(data).csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
-geojson_path <- "C://Users//Usuario//Documents//GitHub//sivys_App_R//bd//zonas.geojson" # Cambiar por tu archivo
-geojson_macrozonas <- "C://Users//Usuario//Documents//GitHub//sivys_App_R//bd//macrozonas.geojson" # Cambiar por tu archivo
+archivo <- read.csv("C://Users//Agustin//Documents//sivys_App_R//bd//sivys_bd.csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+archivo2 <- read.csv("C://Users//Agustin//Documents//sivys_App_R//bd//ripte(data).csv", fileEncoding = "UTF-8", stringsAsFactors = FALSE)
+geojson_path <- "C://Users//Agustin//Documents//sivys_App_R//bd//zonas.geojson" # Cambiar por tu archivo
+geojson_macrozonas <- "C://Users//Agustin//Documents//sivys_App_R//bd//macrozonas.geojson" # Cambiar por tu archivo
+
 
 tres_de_febrero <- st_read(geojson_path)
+print(tres_de_febrero)
 macrozonas <- st_read(geojson_macrozonas)
 
 
@@ -66,8 +68,4 @@ server <- function(input, output, session) {
 
 # Ejecutar la aplicación
 shinyApp(ui = ui, server = server)
-
-
-
-
 
