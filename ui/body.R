@@ -74,7 +74,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_casa", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_casa", "Selecciona una o más fechas:", 
+                selectInput("fecha_casa", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_casa", height = "300px")
               ),
@@ -106,7 +106,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_m2", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_m2", "Selecciona una o más fechas:", 
+                selectInput("fecha_m2", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_m2", height = "300px")
               ),
@@ -138,7 +138,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_mediana_usd", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_mediana_usd", "Selecciona una o más fechas:", 
+                selectInput("fecha_mediana_usd", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_mediana_usd_por_localidad", height = "300px")
               ),
@@ -168,7 +168,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("zona_agrupada_casa", "Seleccionar zonas agrupadas:", 
                             choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_zona_agrupada_Casa", "Selecciona una o más fechas:", 
+                selectInput("fecha_zona_agrupada_Casa", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_mediana_usd_por_za", height = "300px")
               )
@@ -191,7 +191,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_depto", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_depto", "Selecciona una o más fechas:", 
+                selectInput("fecha_depto", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_depto", height = "300px")
               )
@@ -214,7 +214,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_depto", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_depto", "Selecciona una o más fechas:", 
+                selectInput("fecha_depto", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_alq", height = "300px")
               ),
@@ -244,7 +244,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("localidad_depto_m2", "Selecciona una o más localidades:", 
                             choices = localidades, multiple = TRUE, selected = localidades[1]),
-                selectInput("fecha_depto_m2", "Selecciona una o más fechas:", 
+                selectInput("fecha_depto_m2", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_alq_m2", height = "300px")
               ),
@@ -274,7 +274,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("zona_depto_m2_ZA", "Selecciona una o más localidades:", 
                             choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_depto_m2_ZA", "Selecciona una o más fechas:", 
+                selectInput("fecha_depto_m2_ZA", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_alq_m2_ZA", height = "300px")
               ),
@@ -304,7 +304,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("zona_mediana_ZA", "Selecciona una o más localidades:", 
                             choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_mediana_ZA", "Selecciona una o más fechas:", 
+                selectInput("fecha_mediana_ZA", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 selectInput("ambientes_mediana_ZA", "Selecciona la cantidad de ambientes:", 
                             choices = ambientes, multiple = TRUE, selected = ambientes[1]),
@@ -336,7 +336,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("zona_RIPTE", "Selecciona una o más zonas:", 
                             choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_RIPTE", "Selecciona una o más fechas:", 
+                selectInput("fecha_RIPTE", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_RIPTE", height = "300px")
               ),
@@ -366,7 +366,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("zona_SMVM", "Selecciona una o más zonas:", 
                             choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
-                selectInput("fecha_SMVM", "Selecciona una o más fechas:", 
+                selectInput("fecha_SMVM", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_SMVM", height = "300px")
               ),
@@ -396,7 +396,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("propiedad_MDP_pub", "Selecciona casa o departamento:", 
                             choices = tipo_de_propiedad, multiple = TRUE, selected = tipo_de_propiedad[1]),
-                selectInput("fecha_MDP_pub", "Selecciona una o más fechas:", 
+                selectInput("fecha_MDP_pub", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_MDP_pub", height = "300px")
               ),
@@ -424,7 +424,7 @@ background-color: #fffff;
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
-                selectInput("fecha_MDP_depto_alq", "Selecciona una o más fechas:", 
+                selectInput("fecha_MDP_depto_alq", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_MDP_depto_alq", height = "300px")
               ),
@@ -454,7 +454,7 @@ background-color: #fffff;
                 width = 12,
                 selectInput("propiedad_MDP_mediana_m2", "Selecciona casa o departamento:", 
                             choices = tipo_de_propiedad, multiple = TRUE, selected = tipo_de_propiedad[1]),
-                selectInput("fecha_MDP_mediana_m2", "Selecciona una o más fechas:", 
+                selectInput("fecha_MDP_mediana_m2", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_MDP_mediana_m2", height = "300px")
               ),
@@ -482,7 +482,7 @@ background-color: #fffff;
                 status = "primary",
                 solidHeader = TRUE,
                 width = 12,
-                selectInput("fecha_MDP_mediana", "Selecciona una o más fechas:", 
+                selectInput("fecha_MDP_mediana", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 selectInput("ambientes_MDP_mediana", "Selecciona la cantidad de ambientes:", 
                             choices = ambientes, multiple = TRUE, selected = ambientes[1]),
@@ -540,6 +540,24 @@ background-color: #fffff;
         }
       }
     ")),
+
+      div(
+        class = "info-box-content",
+        h3("Cantidad de publicaciones según tipo de operación para el periodo noviembre 2023 a octubre 2024"),
+        tableOutput("resumen_datos")
+      ),
+
+      div(
+        class = "info-box-content",
+        h3("Medianas de valor de venta (en US$) según tipo de propiedad durante el último mes"),
+        tableOutput("tabla_mediana")
+      ),
+
+      div(
+        class = "info-box-content",
+        h3("Medianas de valor de alquileres (en ARS) de departamentos según cantidad de ambientes en Tres de Febrero durante el último mes"),
+        tableOutput("tabla_alquiler")
+    ),
     # Información descriptiva
     
       div(
