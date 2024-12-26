@@ -20,17 +20,24 @@ filtro_propiedad_operacion_DP <- function(Tipo_propiedad, Tipo_operacion, desarr
            desarrollo.prioritario == !!desarrollo.prioritario)
 }
 
-output$resumen_datos <- renderTable({
+output$resumen_datos <- renderUI({
   # Calcular los datos de resumen
   total_datos <- nrow(archivo)  # Cambia 'tu_dataframe' por el nombre real de tu dataset
   total_alquiler <- sum(archivo$Tipo_operacion == "Alquiler", na.rm = TRUE)
   total_venta <- sum(archivo$Tipo_operacion == "Venta", na.rm = TRUE)
   
   # Crear el dataframe para mostrar en la tabla
-  data.frame(
+  resumen_df <- data.frame(
     Indicador = c("Total de Publicaciones", "Cantidad de Publicaciones de Alquiler", "Cantidad de Publicaciones de Venta"),
     Descripción = c(total_datos, total_alquiler, total_venta)
   )
+
+tabla_html <- resumen_df %>%
+    knitr::kable("html", col.names = c("Indicador", "Descripción"), align = "c") %>%
+    kableExtra::kable_styling("striped", full_width = FALSE, position = "center")
+  
+  # Renderizar como HTML
+  HTML(tabla_html)
 })
 
 #Calcula la mediana por m2 y por inmueble
@@ -502,6 +509,9 @@ output$table_alq_m2_ZA <- renderReactable({
     # Crear la tabla reactable
     reactable(datos_combinados)
 })
+
+
+
 
 #Grafico de la mediana de valor de las publicaciones por ZA
 output$plot_mediana_ZA <- renderPlot({

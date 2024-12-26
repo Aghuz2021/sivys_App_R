@@ -37,11 +37,12 @@ zonas_agrupadas <- unique(archivo$zona_agrupada)
 ambientes <- unique(archivo$Ambientes)
 tipo_de_propiedad <-  unique(archivo$Tipo_propiedad)
 
+
+
 # Cargar UI y Server
 source("ui/header.R")
 source("ui/sidebar.R")
 source("ui/body.R")
-
 
 
 
