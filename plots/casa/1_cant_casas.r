@@ -42,3 +42,4 @@ output$table_casa <- renderReactable({
     pivot_wider(names_from = fecha, values_from = conteo_publicaciones, values_fill = 0)
     reactable(datos_filtrados)
 })
+
