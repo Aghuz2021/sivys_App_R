@@ -32,15 +32,5 @@ ggplot(datos_filtrados, aes(x = Fecha, y = Ripte_necesario)) +
 
 # Tabla dinámica del RIPTE
 output$table_RIPTE_Casa <- renderReactable({
-    datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
-        filter( 
-                Fecha %in% input$fecha_ripte_venta) %>%
-    left_join(ripte, by = "fecha") %>% # Ahora ambas tablas tienen la columna 'mes'
-    group_by(fecha) %>%
-    summarise(promedio = mean(promedio, na.rm = TRUE), .groups = "drop") %>%
-    pivot_wider(names_from = fecha, values_from = promedio, values_fill = 0) %>%
-    mutate(across(where(is.numeric), ~ ifelse(is.na(.), NA, scales::label_dollar()(.))))
-  
-
-  reactable(datos_filtrados)
+   
 })
