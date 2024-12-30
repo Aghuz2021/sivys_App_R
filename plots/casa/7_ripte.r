@@ -1,24 +1,46 @@
-output$plot_ripte_necesario <- renderPlot({
-  # Filtrar los datos según las fechas y propiedades seleccionadas
-  datos_filtrados <- archivo2 %>%
-    filter(
-      tipo_propiedad == "Casa", 
-      Fecha %in% input$fechas_ripte  # Filtrar por fechas seleccionadas
-    ) %>%
-    group_by(Fecha)
-    
+# Gráfico de salarios necesarios para comprar una casa de 100 m²
+output$plot_salarios_casa <- renderPlot({
+  
+  # Filtrar los datos según las fechas seleccionadas
+  datos_filtrados <- datos %>%
+    filter(Fecha %in% input$fecha_ripte_venta)  # Filtrar por las fechas seleccionadas
+  
+  # Verificar si hay datos después del filtrado
+  if (nrow(datos_filtrados) == 0) {
+    return(NULL)
+  }
 
-  # Verifica el contenido de datos_filtrados
-  print(datos_filtrados)
+ # Crear el gráfico de barras para Ripte necesario
+ggplot(datos_filtrados, aes(x = Fecha, y = Ripte_necesario)) +
+  geom_col(fill = "blue", color = "black", width = 0.7) +  # Gráfico de barras
+  geom_text(aes(label = Ripte_necesario), vjust = -0.5, size = 4) +  # Etiquetas sobre las barras
+  labs(
+    title = "Ripte Necesario para Comprar una Casa de 100 m²",
+    x = "Fecha",
+    y = "Ripte Necesario"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14),
+    axis.title.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
+    axis.text.y = element_text(size = 12),
+    legend.position = "none"
+  )
+})
 
-  # Generar el gráfico para visualizar el Ripte necesario
-  ggplot(datos_filtrados, aes(x = fecha, y = Ripte_necesario_promedio)) +
-    geom_line(color = "blue") +
-    labs(
-      title = "Promedio de Ripte Necesario por Fecha",
-      x = "Fecha",
-      y = "Ripte Necesario"
-    ) +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Mejorar la visualización de las fechas
+# Tabla dinámica del RIPTE
+output$table_RIPTE_Casa <- renderReactable({
+    datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+        filter( 
+                Fecha %in% input$fecha_ripte_venta) %>%
+    left_join(ripte, by = "fecha") %>% # Ahora ambas tablas tienen la columna 'mes'
+    group_by(fecha) %>%
+    summarise(promedio = mean(promedio, na.rm = TRUE), .groups = "drop") %>%
+    pivot_wider(names_from = fecha, values_from = promedio, values_fill = 0) %>%
+    mutate(across(where(is.numeric), ~ ifelse(is.na(.), NA, scales::label_dollar()(.))))
+  
+
+  reactable(datos_filtrados)
 })

@@ -49,6 +49,10 @@ background-color: #fffff;
 }.skin-blue .sidebar-menu>li>a {
     border-left: 12px solid transparent;
 }
+.btn-warning {
+    background-color: #f39c124d;
+    border-color: #e08e0b;
+}
    .selectize-input { color: #007bff; background-color: #3c8dbc21; }
                 .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
                 .selectize-control.multi .selectize-input>div {
@@ -90,7 +94,8 @@ tabItem(
           selectInput("fecha_casa", "Selecciona una o más fechas:",
             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]
           ),
-          plotOutput("plot_casa", height = "300px")
+          actionButton("limpiar_casa", "Limpiar", icon = icon("eraser"), class = "btn btn-warning"), # Botón de limpiar
+          plotOutput("plot_cant_casa", height = "300px")
         ),
         box(
           title = "Tabla dinámica de publicaciones de ventas de casas",
@@ -207,9 +212,16 @@ tabItem(
           solidHeader = TRUE,
           width = 12,
           selectInput("fecha_ripte_venta", "Selecciona una o más fechas:",
-            choices = fechas_ripte, multiple = TRUE, selected = fechas_ripte[1]
+            choices = datos_Fechas, multiple = TRUE, selected = datos_Fechas[1]
           ),
-          plotOutput("plot_ripte_necesario", height = "300px")
+          plotOutput("plot_salarios_casa", height = "430px")
+        ),
+         box(
+          title = " Tabla dinamica de cantidad de m² por Localidad. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_RIPTE_Casa")
         )
       )
     ),
