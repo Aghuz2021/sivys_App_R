@@ -60,24 +60,6 @@ background-color: #fffff;
                   background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
       "))
   ),
-tabItem(
-      # Tab para "Venta de casas"
-    tabItem(
-      tabName = "mapa_mediana",
-      fluidRow(
-        box(
-          title = "Mapa mediana",
-          status = "primary",
-          solidHeader = TRUE,
-          width = 12,
-          selectInput("fecha_mediana", "Selecciona una o más fechas:",
-            choices = fechas_formateadas, multiple = FALSE, selected = fechas_formateadas[1]
-          ),
-          leafletOutput("mapa2", height = "500px")
-        )
-      )
-    )
-  ),
   tabItems(
     # Tab para "Venta de casas"
     tabItem(
@@ -207,7 +189,7 @@ tabItem(
       tabName = "ripte_casa_venta",
       fluidRow(
         box(
-          title = " ",
+          title = "Cantidad de salarios (RIPTE) necesarios para comprar una casa de 100 m² ",
           status = "primary",
           solidHeader = TRUE,
           width = 12,
@@ -217,11 +199,33 @@ tabItem(
           plotOutput("plot_salarios_casa", height = "430px")
         ),
          box(
-          title = " Tabla dinamica de cantidad de m² por Localidad. ",
+          title = " Tabla dinamica Ripte. ",
           status = "primary",
           solidHeader = TRUE,
           width = 12,
-          reactableOutput("table_RIPTE_Casa")
+          reactableOutput("table_RIPTE_2")
+        )
+      )
+    ),
+    tabItem(
+      tabName = "SMVM_casa_venta",
+      fluidRow(
+        box(
+          title = "Cantidad de salarios (RIPTE) necesarios para comprar una casa de 100 m² ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("fecha_smvm_venta", "Selecciona una o más fechas:",
+            choices = datos_Fechas, multiple = TRUE, selected = datos_Fechas[1]
+          ),
+          plotOutput("plot_smvm_casa", height = "430px")
+        ),
+         box(
+          title = " Tabla dinamica Ripte. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_smvm_2")
         )
       )
     ),
@@ -293,6 +297,7 @@ tabItem(
           HTML("<h3>Mapa de Tres de Febrero con sus localidades.</h3>"),
           
            leafletOutput("mapa", height = "400px"),
+           
           HTML("
           <h3>Objetivos</h3>
           <p>
@@ -475,6 +480,28 @@ tabItem(
         )
         
         
+      )
+    ),
+     tabItem(
+      tabName = "",
+      fluidRow(
+        box(
+          title = "Cantidad de salarios (RIPTE) necesarios para comprar una casa de 100 m² ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          selectInput("fecha_smvm_venta", "Selecciona una o más fechas:",
+            choices = datos_Fechas, multiple = TRUE, selected = datos_Fechas[1]
+          ),
+          plotOutput("plot_smvm_casa", height = "430px")
+        ),
+         box(
+          title = " Tabla dinamica Ripte. ",
+          status = "primary",
+          solidHeader = TRUE,
+          width = 12,
+          reactableOutput("table_smvm_2")
+        )
       )
     ),
     tabItem(

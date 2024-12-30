@@ -8,14 +8,14 @@ sidebarUI <- dashboardSidebar(
 
     ),
     menuItem("Venta de casas", icon = icon("home"), startExpanded = FALSE,
-            menuSubItem("mapa_mediana", tabName = "mapa_mediana", icon = NULL),
             menuSubItem("1. Cantidad de publicaciones", tabName = "venta_casa", icon = NULL),
             menuSubItem("2. Cantidad de m² publicados", tabName = "Cantidad_m²", icon = NULL), 
             menuSubItem("3. Mediana de valor en usd por localidad.", tabName = "MEDIANA", icon = NULL),
             menuSubItem("4. Mediana de valor en usd por Zona agrupada", tabName = "mediana_za_casa", icon = NULL),
             menuSubItem("(corregir) Mediana de valor en usd del m² por ZA.", tabName = "mediana_za_m2_casa", icon = NULL),
             menuSubItem("(corregir)Mediana de valor en usd del m² por localidad", tabName = "mediana_localidad_m2_casa", icon = NULL),
-            menuSubItem("Ripte", tabName = "ripte_casa_venta", icon = NULL)
+            menuSubItem("7. Ripte", tabName = "ripte_casa_venta", icon = NULL),
+            menuSubItem("8. SMVM", tabName = "SMVM_casa_venta", icon = NULL)
              
     ),
     menuItem("Venta de departamento", icon = icon("building"), startExpanded = FALSE,
@@ -26,7 +26,7 @@ sidebarUI <- dashboardSidebar(
              menuSubItem("Mediana de valor usd por ZA", tabName = "depto_mediana_za"),
              menuSubItem("Mediana del valor (en US$) del m² por ZA", tabName = "depto_nuevo"),
              menuSubItem("(RIPTE) necesarios para comprar un depto de 100 m²", tabName = "depto_nuevo"),
-             menuSubItem("(SMVM) necesarios para comprar un depto de 45 m²", tabName = "depto_nuevo")
+             menuSubItem("(SMVM) necesarios para comprar un depto de 45 m²", tabName = "smvm_Depto_venta")
     ),
     menuItem("Alquiler de departamento", icon = icon("building"), startExpanded = FALSE,
              menuSubItem("1. Cantidad de publicaciones", tabName = "cant_alquiler_Depto", icon  = NULL),

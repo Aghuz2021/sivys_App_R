@@ -68,3 +68,5 @@ output$macrozonas <- renderLeaflet({
       opacity = 1  # Opacidad de la leyenda
     )
 })
+
+

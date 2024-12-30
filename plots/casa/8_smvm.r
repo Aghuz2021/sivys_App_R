@@ -1,9 +1,9 @@
 # Gráfico de salarios necesarios para comprar una casa de 100 m²
-output$plot_salarios_casa <- renderPlot({
+output$plot_smvm_casa <- renderPlot({
   
   # Filtrar los datos según las fechas seleccionadas
-  datos_filtrados <- datos %>%
-    filter(Fecha %in% input$fecha_ripte_venta)  # Filtrar por las fechas seleccionadas
+  datos_filtrados <- smvm_casa %>%
+    filter(Fecha %in% input$fecha_smvm_venta)  # Filtrar por las fechas seleccionadas
   
   # Verificar si hay datos después del filtrado
   if (nrow(datos_filtrados) == 0) {
@@ -11,13 +11,13 @@ output$plot_salarios_casa <- renderPlot({
   }
 
  # Crear el gráfico de barras para Ripte necesario
-ggplot(datos_filtrados, aes(x = Fecha, y = Ripte_necesario)) +
+ggplot(datos_filtrados, aes(x = Fecha, y = smvm_necesario)) +
   geom_col(fill = "blue", color = "black", width = 0.7) +  # Gráfico de barras
-  geom_text(aes(label = Ripte_necesario), vjust = -0.5, size = 4) +  # Etiquetas sobre las barras
+  geom_text(aes(label = smvm_necesario), vjust = -0.5, size = 4) +  # Etiquetas sobre las barras
   labs(
-    title = "Ripte Necesario para Comprar una Casa de 100 m²",
+    title = "SMVM necesario para Comprar una Casa de 100 m²",
     x = "Fecha",
-    y = "Ripte Necesario"
+    y = "SMVM Necesario"
   ) +
   theme_minimal() +
   theme(
@@ -30,13 +30,13 @@ ggplot(datos_filtrados, aes(x = Fecha, y = Ripte_necesario)) +
   )
 })
 
-# Tabla dinámica del RIPTE
-output$table_RIPTE_2 <- renderReactable({
+# Tabla dinámica del SMVM
+output$table_smvm_2 <- renderReactable({
     datos_filtrados <- filtro_propiedad_operacion("Departamento", "Alquiler") %>%
         rename(Zona_Agrupada = zona_agrupada) %>%
-        filter( Zona_Agrupada %in% input$zona_RIPTE,
-                fecha %in% input$fecha_ripte_venta) %>%
-    left_join(ripte, by = "fecha") %>% # Ahora ambas tablas tienen la columna 'mes'
+        filter( Zona_Agrupada %in% input$zona_SMVM,
+                fecha %in% input$fecha_smvm_venta) %>%
+    left_join(smvm, by = "fecha") %>% # Ahora ambas tablas tienen la columna 'mes'
     group_by(fecha) %>%
     summarise(promedio = mean(promedio, na.rm = TRUE), .groups = "drop") %>%
     pivot_wider(names_from = fecha, values_from = promedio, values_fill = 0) %>%
