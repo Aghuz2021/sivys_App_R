@@ -511,8 +511,6 @@ output$table_alq_m2_ZA <- renderReactable({
 })
 
 
-
-
 #Grafico de la mediana de valor de las publicaciones por ZA
 output$plot_mediana_ZA <- renderPlot({
     # Calcular los totales por mes y por ambiente para "Tres de Febrero"
