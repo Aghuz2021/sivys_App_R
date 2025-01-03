@@ -267,6 +267,149 @@ output$table_usd_por_localidad <- renderReactable({
 })
 
 
+#Mediana de valor del m2 en venta por ZA
+output$plot_mediana_m2_za_casa <- renderPlot({
+  # Calcular la mediana de valor del m² para "Tres de Febrero" (sin distinción por propiedad)
+  tres_de_febrero <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop") %>%
+    mutate(zona_agrupada = "Tres de Febrero")  # Asignar etiqueta de grupo
+  
+  # Calcular la mediana de valor del m² para los datos filtrados
+  datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(zona_agrupada %in% input$zona_mediana_m2_usd,
+           fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(zona_agrupada, fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop")
+  
+  # Combinar los datos
+  datos_combinados <- bind_rows(datos_filtrados, tres_de_febrero)
+  
+  # Crear el gráfico
+  ggplot(datos_combinados, aes(x = fecha, y = dolar_m2t, color = zona_agrupada, group = zona_agrupada)) +
+    geom_line() +
+    geom_point(size = 2) +
+    geom_text(aes(label = scales::label_dollar(accuracy = 1)(dolar_m2t)), vjust = -0.5, size = 4) +
+    scale_y_continuous(labels = scales::label_dollar(accuracy = 1)) +
+    labs(title = "",
+         x = "Fecha",
+         y = "Mediana de valor (US$)") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 14),
+          axis.title.x = element_text(size = 12),
+          axis.title.y = element_text(size = 12),
+          axis.text.x = element_text(size = 12),
+          axis.text.y = element_text(size = 12),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 9))
+})
+
+# Tabla dinámica de la mediana de valor del m2 en venta
+output$table_mediana_m2_za_casa <- renderReactable({
+  # Calcular la mediana de valor del m² para "Tres de Febrero" (sin distinción por propiedad)
+  tres_de_febrero <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop") %>%
+    mutate(zona_agrupada = "Tres de Febrero")
+  
+  # Calcular la mediana de valor del m² para los datos filtrados
+  datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(zona_agrupada %in% input$zona_mediana_m2_usd,
+           fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(zona_agrupada, fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop")
+  
+  # Combinar los datos
+  datos_combinados <- bind_rows(datos_filtrados, tres_de_febrero) %>%
+    pivot_wider(names_from = fecha, values_from = dolar_m2t, values_fill = list(dolar_m2t = 0)) %>%
+    mutate(across(where(is.numeric), ~ scales::label_dollar(accuracy = 1)(.)))
+  
+  # Crear la tabla reactable
+  reactable(datos_combinados)
+})
+
+
+#Mediana de valor del m2 en venta por localidad
+output$plot_mediana_m2_casa <- renderPlot({
+  # Calcular la mediana de valor del m² para "Tres de Febrero" (sin distinción por propiedad)
+  tres_de_febrero <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop") %>%
+    mutate(nombre = "Tres de Febrero")  # Asignar etiqueta de grupo
+  
+  # Calcular la mediana de valor del m² para los datos filtrados
+  datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(nombre %in% input$localidad_mediana_m2_usd,
+           fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(nombre, fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop")
+  
+  # Combinar los datos
+  datos_combinados <- bind_rows(datos_filtrados, tres_de_febrero)
+  
+  # Crear el gráfico
+  ggplot(datos_combinados, aes(x = fecha, y = dolar_m2t, color = nombre, group = nombre)) +
+    geom_line() +
+    geom_point(size = 2) +
+    geom_text(aes(label = scales::label_dollar(accuracy = 1)(dolar_m2t)), vjust = -0.5, size = 4) +
+    scale_y_continuous(labels = scales::label_dollar(accuracy = 1)) +
+    labs(title = "",
+         x = "Fecha",
+         y = "Mediana de valor (US$)") +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 14),
+          axis.title.x = element_text(size = 12),
+          axis.title.y = element_text(size = 12),
+          axis.text.x = element_text(size = 12),
+          axis.text.y = element_text(size = 12),
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 9))
+})
+
+# Tabla dinámica de la mediana de valor del m2 en venta
+output$table_mediana_m2_casa <- renderReactable({
+  # Calcular la mediana de valor del m² para "Tres de Febrero" (sin distinción por propiedad)
+  tres_de_febrero <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop") %>%
+    mutate(nombre = "Tres de Febrero")
+  
+  # Calcular la mediana de valor del m² para los datos filtrados
+  datos_filtrados <- filtro_propiedad_operacion("Casa", "Venta") %>%
+    filter(nombre %in% input$localidad_mediana_m2_usd,
+           fecha %in% input$fecha_mediana_m2_usd) %>%
+    mutate(dolar_m2t = precio_dolares / Total_area) %>%
+    group_by(nombre, fecha) %>%
+    filter(n() >= 20) %>%
+    summarise(dolar_m2t = round(median(dolar_m2t, na.rm = TRUE), 0), .groups = "drop")
+  
+  # Combinar los datos
+  datos_combinados <- bind_rows(datos_filtrados, tres_de_febrero) %>%
+    pivot_wider(names_from = fecha, values_from = dolar_m2t, values_fill = list(dolar_m2t = 0)) %>%
+    mutate(across(where(is.numeric), ~ scales::label_dollar(accuracy = 1)(.)))
+  
+  # Crear la tabla reactable
+  reactable(datos_combinados)
+})
+
 #-------depto------#
 # Gráfico de Casas en Venta
 output$plot_depto <- renderPlot({
@@ -290,6 +433,55 @@ output$plot_depto <- renderPlot({
           legend.title = element_text(size = 10),
           legend.text = element_text(size = 9))
 })
+
+
+#Cantidad de publicaciones según cantidad de ambientes por ZA
+output$plot_cant_amb_depto <- renderPlot({
+    # Calcular la mediana de valor por Zona Agrupada y Ambientes
+    datos_filtrados <- filtro_propiedad_operacion("Departamento", "Venta") %>%
+        rename(Zona_Agrupada = zona_agrupada) %>%
+        filter(Zona_Agrupada %in% input$zona_depto,
+               fecha %in% input$fecha_depto,
+               Ambientes %in% input$ambientes_depto) %>%
+        group_by(fecha, Zona_Agrupada, Ambientes) %>%
+        summarise(conteo_publicaciones = n(), .groups = "drop")
+
+    # Crear el gráfico
+    ggplot(datos_filtrados, aes(x = fecha, y = conteo_publicaciones, color = interaction(Zona_Agrupada, Ambientes), group = interaction(Zona_Agrupada, Ambientes))) +
+        geom_line() +
+        geom_point(size = 2) +
+        geom_text(aes(label = conteo_publicaciones), vjust = -0.5, size = 4) +
+        labs(title = "",
+             x = "Fecha",
+             y = "Mediana de valor",
+             color = "Zona y Ambientes") +
+        theme_minimal() +
+        theme(plot.title = element_text(size = 14),
+              axis.title.x = element_text(size = 12),
+              axis.title.y = element_text(size = 12),
+              axis.text.x = element_text(size = 12),
+              axis.text.y = element_text(size = 12),
+              legend.title = element_text(size = 10),
+              legend.text = element_text(size = 9))
+})
+
+# Tabla dinámica de la mediana de valor de las publicaciones por ZA
+output$table_cant_amb_depto <- renderReactable({
+    # Calcular la mediana de valor por Zona Agrupada y Ambientes
+    datos_filtrados <- filtro_propiedad_operacion("Departamento", "Venta") %>%
+        rename(Zona_Agrupada = zona_agrupada) %>%
+        filter(Zona_Agrupada %in% input$zona_depto,
+               fecha %in% input$fecha_depto,
+               Ambientes %in% input$ambientes_depto) %>%
+        group_by(fecha, Zona_Agrupada, Ambientes) %>%
+        summarise(conteo_publicaciones = n(), .groups = "drop") %>%
+        pivot_wider(names_from = Ambientes, values_from = conteo_publicaciones, values_fill = NA)
+
+    # Crear la tabla reactable
+    reactable(datos_filtrados)
+})
+
+
 output$plot_mediana_usd_por_za <- renderPlot({
   # Filtrar los datos según las localidades y fechas seleccionadas
   datos_filtrados <- archivo %>%

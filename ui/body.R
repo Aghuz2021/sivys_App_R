@@ -174,6 +174,66 @@ background-color: #fffff;
               )
             )
     ),
+    tabItem(tabName = "mediana_m2_za_casa",
+            fluidRow(
+              tags$style(HTML("
+                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+                }
+              ")),
+              box(
+                title = "Mediana de Precio por m² en USD de Casas en Venta por ZA",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                selectInput("zona_mediana_m2_usd", "Selecciona una o más localidades:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
+                selectInput("fecha_mediana_m2_usd", "Selecciona uno o más meses:", 
+                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
+                plotOutput("plot_mediana_m2_za_casa", height = "300px")
+              ),
+                box(
+                title = "Tabla dinámica de Mediana de Precio por m² en USD de Casas en Venta por ZA",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                reactableOutput("table_mediana_m2_za_casa")
+              )
+            )
+    ),
+    tabItem(tabName = "mediana_m2_casa",
+            fluidRow(
+              tags$style(HTML("
+                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+                }
+              ")),
+              box(
+                title = "Mediana de Precio por m² en USD de Casas en Venta por localidad",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                selectInput("localidad_mediana_m2_usd", "Selecciona una o más localidades:", 
+                            choices = localidades, multiple = TRUE, selected = localidades[1]),
+                selectInput("fecha_mediana_m2_usd", "Selecciona uno o más meses:", 
+                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
+                plotOutput("plot_mediana_m2_casa", height = "300px")
+              ),
+                box(
+                title = "Tabla dinámica de Mediana de Precio por m² en USD de Casas en Venta por localidad",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                reactableOutput("table_mediana_m2_casa")
+              )
+            )
+    ),
     tabItem(tabName = "cantidad_public_depto",
             fluidRow(
               tags$style(HTML("
@@ -194,6 +254,38 @@ background-color: #fffff;
                 selectInput("fecha_depto", "Selecciona uno o más meses:", 
                             choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
                 plotOutput("plot_depto", height = "300px")
+              )
+            )
+    ),
+    tabItem(tabName = "cant_amb_za_depto",
+            fluidRow(
+              tags$style(HTML("
+                .selectize-input { color: #007bff; background-color: #3c8dbc21; }
+                .selectize-dropdown .option:hover { background-color: #3c8dbc21; }
+                .selectize-control.multi .selectize-input>div {
+                  cursor: pointer; margin: 0 3px 3px 0; padding: 1px 5px; 
+                  background: #f9ffa5; color: #333; border: 0 solid rgba(0, 0, 0, 0);
+                }
+              ")),
+              box(
+                title = "cantidad de publicaciones de depto según ambientes por ZA",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                selectInput("zona_depto", "Selecciona una o más zonas:", 
+                            choices = zonas_agrupadas, multiple = TRUE, selected = zonas_agrupadas[1]),
+                selectInput("fecha_depto", "Selecciona uno o más meses:", 
+                            choices = fechas_formateadas, multiple = TRUE, selected = fechas_formateadas[1]),
+                selectInput("ambientes_depto", "Selecciona la cantidad de ambientes:", 
+                            choices = na.omit(ambientes), multiple = TRUE, selected = na.omit(ambientes)[1]),
+                plotOutput("plot_cant_amb_depto", height = "300px")
+              ),
+              box(
+                title = "Tabla dinámica de publicaciones de departamentos según ambientes por ZA",
+                status = "primary",
+                solidHeader = TRUE,
+                width = 12,
+                reactableOutput("table_cant_amb_depto")
               )
             )
     ),
